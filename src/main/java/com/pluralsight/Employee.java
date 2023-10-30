@@ -62,26 +62,21 @@ public class Employee {
     }
 
     public double getTotalPay() {
-        return totalPay;
-    }
 
-    public void setTotalPay(double totalPay) {
-        this.totalPay = totalPay;
+        if (overtimeHours < 0) {
+            return regularHours * payRate;
+        } else {
+            return  (regularHours * payRate) + (overtimeHours * payRate) *1.5;
+        }
+
     }
 
     public double getRegularHours() {
         return regularHours;
     }
 
-    public void setRegularHours(double regularHours) {
-        this.regularHours = regularHours;
-    }
-
     public double getOvertimeHours() {
         return overtimeHours;
     }
 
-    public void setOvertimeHours(double overtimeHours) {
-        this.overtimeHours = overtimeHours;
-    }
 }

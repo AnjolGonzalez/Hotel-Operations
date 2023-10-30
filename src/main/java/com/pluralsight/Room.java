@@ -1,11 +1,14 @@
 package com.pluralsight;
 
 public class Room {
-    int numberOfBeds;
-    double price;
-    boolean occupied;
-    boolean isDirty;
-    boolean isAvailable;
+    private int numberOfBeds;
+    private double price;
+    private boolean occupied;
+    private boolean isDirty = false;
+    private boolean isAvailable = true;
+    private boolean checkIn;
+    private boolean checkOut;
+    private boolean cleanRoom;
 
     Room (int numberOfBeds, double price, boolean occupied, boolean isDirty, boolean isAvailable) {
         this.numberOfBeds = numberOfBeds;
@@ -15,43 +18,44 @@ public class Room {
         this.isAvailable = isAvailable;
     }
 
-    private int getNumberOfBeds() {
+    public int getNumberOfBeds() {
         return numberOfBeds;
     }
 
-    private void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
-    }
-
-    private double getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    private void setPrice(double price) {
-        this.price = price;
-    }
-
-    private boolean isOccupied() {
+    public boolean isOccupied() {
         return occupied;
     }
 
-    private void setOccupied(boolean occupied) {
-        this.occupied = occupied;
-    }
-
-    private boolean isDirty() {
+    public boolean isDirty() {
         return isDirty;
     }
 
-    private void setDirty(boolean dirty) {
-        isDirty = dirty;
-    }
-
-    private boolean isAvailable() {
+    public boolean isAvailable() {
         return isAvailable;
     }
 
-    private void setAvailable(boolean available) {
-        isAvailable = available;
+    public void isCheckIn() {
+        isDirty = true;
+        occupied = true;
+        isAvailable = false;
+    }
+
+    public boolean isCheckOut() {
+        if (!isDirty) {
+            isDirty = false;
+            occupied = false;
+        } else {
+            cleanRoom();
+            checkOut();
+        }
+        return isAvailable;
+    }
+
+    public boolean isCleanRoom() {
+        return cleanRoom;
     }
 }
