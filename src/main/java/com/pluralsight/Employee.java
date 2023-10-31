@@ -1,6 +1,13 @@
 package com.pluralsight;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
 public class Employee {
+    static Scanner prompt = new Scanner(System.in);
+    static LocalDateTime time = LocalDateTime.now();
+    static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     String employeeId;
     String name;
     String department;
@@ -9,8 +16,10 @@ public class Employee {
     double totalPay;
     double regularHours;
     double overtimeHours;
+    double punchIn;
+    double punchOut;
 
-    public Employee(String employeeId, String name, String department, double payRate, float hoursWorked, double totalPay, double regularHours, double overtimeHours) {
+    public Employee(String employeeId, String name, String department, double payRate, float hoursWorked, double totalPay, double regularHours, double overtimeHours, double punchIn, double punchOut) {
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
@@ -19,6 +28,8 @@ public class Employee {
         this.totalPay = totalPay;
         this.regularHours = regularHours;
         this.overtimeHours = overtimeHours;
+        this.punchIn = punchIn;
+        this.punchOut = punchOut;
     }
 
     public String getEmployeeId() {
@@ -70,6 +81,9 @@ public class Employee {
         }
 
     }
+    public void setTotalPay() {
+        this.totalPay = totalPay;
+    }
 
     public double getRegularHours() {
         return regularHours;
@@ -77,6 +91,26 @@ public class Employee {
 
     public double getOvertimeHours() {
         return overtimeHours;
+    }
+    public static void punchCardTime() {
+        System.out.println("\nWelcome\n" +
+                "What would you like to do?:\n" +
+                "1) Check in\n" +
+                "2) Check out\n" +
+                "");
+        String userPrompt = prompt.nextLine();
+
+        switch (userPrompt) {
+            case "1":
+                System.out.println("Welcome " + timeFormatter.format(time));
+            break;
+            case "2":
+                System.out.println("Goodbye!\n" +
+                        "Have a great day!\n" +
+                        "Thank you for visting\n" + timeFormatter.format(time));
+            default:
+                System.out.print("What would you like to do?: ");
+        }
     }
 
 }
