@@ -1,23 +1,23 @@
 package com.pluralsight;
-
-import java.time.LocalDateTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.util.*;
 
 public class Employee {
     static Scanner prompt = new Scanner(System.in);
     static LocalDateTime time = LocalDateTime.now();
     static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    String employeeId;
-    String name;
-    String department;
-    double payRate;
+    public String employeeId;
+    public String name;
+    public String department;
+    public double payRate;
     float hoursWorked;
-    double totalPay;
-    double regularHours;
-    double overtimeHours;
-    double punchIn;
-    double punchOut;
+    public double totalPay;
+    public double regularHours;
+    public double overtimeHours;
+    public double punchIn;
+    public double punchOut;
+    public static double decimalTime = time.getHour() + time.getMinute() / 60;
 
     public Employee(String employeeId, String name, String department, double payRate, float hoursWorked, double totalPay, double regularHours, double overtimeHours, double punchIn, double punchOut) {
         this.employeeId = employeeId;
@@ -77,40 +77,56 @@ public class Employee {
         if (overtimeHours < 0) {
             return regularHours * payRate;
         } else {
-            return  (regularHours * payRate) + (overtimeHours * payRate) *1.5;
+            return  (regularHours * payRate) + (overtimeHours * payRate * 1.5);
         }
-
     }
-    public void setTotalPay() {
+    public void setTotalPay(double totalPay) {
         this.totalPay = totalPay;
     }
 
     public double getRegularHours() {
         return regularHours;
     }
+    public void setRegularHours(double regularHours) {
+        this.regularHours = regularHours;
+    }
 
     public double getOvertimeHours() {
         return overtimeHours;
     }
+    public void setOvertimeHours(double overtimeHours) {
+        this.overtimeHours = overtimeHours;
+    }
     public static void punchCardTime() {
-        System.out.println("\nWelcome\n" +
-                "What would you like to do?:\n" +
-                "1) Check in\n" +
-                "2) Check out\n" +
-                "");
-        String userPrompt = prompt.nextLine();
 
-        switch (userPrompt) {
-            case "1":
-                System.out.println("Welcome " + timeFormatter.format(time));
-            break;
-            case "2":
-                System.out.println("Goodbye!\n" +
-                        "Have a great day!\n" +
-                        "Thank you for visting\n" + timeFormatter.format(time));
-            default:
-                System.out.print("What would you like to do?: ");
+        while (true) {
+            System.out.println("\nWelcome\n" +
+                    "1) Check in\n" +
+                    "2) Check out\n" +
+                    "3) Exit\n");
+            String userPrompt = prompt.nextLine();
+
+            switch (userPrompt) {
+                case "1":
+                    punchIn();
+                    break;
+                case "2":
+                    punchOut();
+                    break;
+                case "3":
+                    System.exit(0);
+                default:
+                    System.out.print("What would you like to do?: ");
+            }
         }
     }
-
+    public static void punchIn(double overtimeHours) {}
+    public static void punchIn() {
+        System.out.println("Thank you for clocking in at " + timeFormatter.format(time) + " " + decimalTime);
+    }
+    public static void punchOut(double overtimeHours) {}
+    public static void punchOut() {
+        System.out.println("Have a nice day!\n" +
+                "Your clock out time is " + timeFormatter.format(time) + " " + decimalTime);
+    }
 }
