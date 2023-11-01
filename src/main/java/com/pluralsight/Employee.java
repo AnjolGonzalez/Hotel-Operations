@@ -103,7 +103,8 @@ public class Employee {
             System.out.println("\nWelcome\n" +
                     "1) Check in\n" +
                     "2) Check out\n" +
-                    "3) Exit\n");
+                    "3) Exit\n" +
+                    "What would you like to do?: ");
             String userPrompt = prompt.nextLine();
 
             switch (userPrompt) {
@@ -116,7 +117,7 @@ public class Employee {
                 case "3":
                     System.exit(0);
                 default:
-                    System.out.print("What would you like to do?: ");
+                    System.out.print("Please choose one of the following: ");
             }
         }
     }
